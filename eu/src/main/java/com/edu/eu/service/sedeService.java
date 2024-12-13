@@ -5,45 +5,42 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edu.eu.dao.ISedeDao;
+import com.edu.eu.dao.IsedeDao;
 import com.edu.eu.entity.sede;
 
 @Service
-public class sedeService implements ISedeService{
+public class sedeService implements IsedeService{
 
 	@Autowired
-	ISedeDao dao;
+	IsedeDao dao;
 	
 	@Override
-	public List<sede> addSede(sede sede) {
+	public List<sede> addsede(sede sede) {
 		return dao.guardarsede(sede);
 	}
 
 	@Override
-	public sede upsede(sede sede) {
+	public sede updatesede(sede sede) {
 		
-		int id = sede.getId();
+		int id_Sede = sede.getIdSede();
 		
-		if (!findIdSede(id).equals(null)) {
+		if(!findIdsede(id_Sede).equals(null)) {
+			
 			return dao.actualizarsede(sede);
+			
 		}
 		
 		return null;
 	}
 
 	@Override
-	public List<sede> lisAll() {
+	public List<sede> listAll() {
 		return dao.listacompleta();
 	}
 
 	@Override
-	public sede findIdSede(int id) {
-		return dao.busquedaPorId(id);
-	}
-
-	@Override
-	public sede findEstadoSede(boolean estado) {
-		return dao.busquedaPorDisponibilidad(estado);
+	public sede findIdsede(int id_sede) {
+		return dao.busquedaPorId(id_sede);
 	}
 
 }

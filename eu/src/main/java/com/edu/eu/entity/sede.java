@@ -1,36 +1,41 @@
 package com.edu.eu.entity;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "sedes")
-public class sede {
+@NamedQuery(name = "sede.findAll", query = "SELECT s FROM sede s")
+public class sede implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idSede")
-	private int id;
+	@Column(name = "id_sede")
+	private int id_sede;
 	
 	@Column(name = "direccion")
 	private String direccion;
 	
 	@Column(name = "estado")
-	private boolean sedeDispo;
+	private boolean estado;
 
-	public int getId() {
-		return id;
+	
+	public int getIdSede() {
+		return id_sede;
 	}
 
-	public boolean isSedeDispo() {
-		return sedeDispo;
-	}
-
-	public void setSedeDispo(boolean sedeDispo) {
-		this.sedeDispo = sedeDispo;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setIdSede(int idSede) {
+		this.id_sede = idSede;
 	}
 
 	public String getDireccion() {
@@ -42,13 +47,11 @@ public class sede {
 	}
 
 	public boolean isEstado() {
-		return sedeDispo;
+		return estado;
 	}
 
-	public void setEstado(boolean sedeDispo) {
-		this.sedeDispo = sedeDispo;
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
-	
-	
 	
 }
