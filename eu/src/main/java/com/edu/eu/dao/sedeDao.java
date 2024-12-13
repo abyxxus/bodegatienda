@@ -6,18 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.edu.eu.entity.sede;
-import com.edu.eu.jpa.IsedeJpa;
+import com.edu.eu.jpa.ISedeJpa;
 
 @Repository
-public class sedeDao implements IsedeDao{
+public class sedeDao implements ISedeDao{
 
 	@Autowired
-	IsedeJpa jpa;
-	
+	ISedeJpa jpa;
 	
 	@Override
 	public List<sede> guardarsede(sede sede) {
+		
 		jpa.save(sede);
+		
 		return listacompleta();
 	}
 
@@ -32,8 +33,13 @@ public class sedeDao implements IsedeDao{
 	}
 
 	@Override
-	public sede busquedaPorId(int id_sede) {
-		return jpa.findById(id_sede).orElse(null);
+	public sede busquedaPorId(int id) {
+		return jpa.findById(id).orElse(null);
+	}
+
+	@Override
+	public sede busquedaPorDisponibilidad(boolean estado) {
+		return jpa.findBySedeDispo(estado);
 	}
 
 }

@@ -45,11 +45,6 @@
 			<artifactId>ProyectoCine</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>co.edu.ue</groupId>
-			<artifactId>PrimerServicio</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>

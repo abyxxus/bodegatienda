@@ -1,7 +1,5 @@
 package com.edu.eu.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,48 +12,60 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edu.eu.entity.sede;
-import com.edu.eu.service.IsedeService;
+import com.edu.eu.service.ISedeService;
+import java.util.List;
 
 @RestController
 public class sedeController {
 
 	@Autowired
-	IsedeService service;
+	ISedeService service;
 	
-	@PostMapping(value = "sede-save", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE, consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<sede>> postsede(@RequestBody sede sede){
+	
+	@PostMapping(value = "sedeSave", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE, consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<sede>> postSede(@RequestBody sede sede){
 		
-		List<sede> listsede = service.addsede(sede);
+		List<sede> listSede = service.addSede(sede);
 		
-		return new ResponseEntity<List<sede>>(listsede, HttpStatus.CREATED);
+		return new ResponseEntity<List<sede>>(listSede, HttpStatus.CREATED);
 		
 	}
 	
-	@GetMapping(value = "sede-all", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<sede>> getAllsede(){
+	
+	@GetMapping(value = "sedeAll", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<sede>> getAllSede(){
 		
-		List<sede> listsede = service.listAll();
+		List<sede> listSede = service.lisAll();
 		
-		HttpHeaders headears = new HttpHeaders();
+		HttpHeaders head = new HttpHeaders();
 		
-		headears.add("can't datos", String.valueOf(listsede.size()));
-		headears.add("test", "valor");
+		head.add("can´t sede", String.valueOf(listSede.size()));
+		head.add("test", "valor");
 		
-		return new ResponseEntity<List<sede>>(listsede, headears, HttpStatus.OK);
+		return new ResponseEntity<List<sede>>(listSede, head, HttpStatus.OK);
 		
 	}
 	
-	@PutMapping(value = "sede-update")
-	public ResponseEntity<sede> putsede(@RequestBody sede sede){
+	
+	@PutMapping(value = "sedeupdate")
+	public ResponseEntity<sede> updateSede(@RequestBody sede sede){
 		
-		return new ResponseEntity<sede>(service.updatesede(sede), HttpStatus.ACCEPTED);
+		return new ResponseEntity<sede>(service.upsede(sede), HttpStatus.ACCEPTED);
 		
 	}
 	
-	@GetMapping(value = "sede-id")
-	public ResponseEntity<sede> getIdsede(@RequestParam("id_Sede") int id_Sede){
+	
+	@GetMapping(value = "sedeId")
+	public ResponseEntity<sede> getIdSede(@RequestParam("idSede") int id){
 		
-		return new ResponseEntity<sede>(service.findIdsede(id_Sede), HttpStatus.ACCEPTED);
+		return new ResponseEntity<sede>(service.findIdSede(id), HttpStatus.FOUND);
+		
+	}
+	
+	
+	@GetMapping(value = "sedeDispo")
+	public ResponseEntity<sede> getByDispo(@RequestParam("estado") boolean estado){
+		return new ResponseEntity<sede>(service.findEstadoSede(estado), HttpStatus.ACCEPTED);
 		
 	}
 	
